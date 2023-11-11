@@ -3,30 +3,15 @@ package api;
 import java.util.List;
 
 public class ApiResponse {
-    private int count;
-    private int pages;
-    private String next;
-    private String prev;
+    private static final String BASE_URL = "https://rickandmortyapi.com/api/";
 
-    private List<Character> results;
+    public static RickAndMortyApiService createService() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-    public List<Character> getResults() {
-        return results;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public int getPages() {
-        return pages;
-    }
-
-    public String getNext() {
-        return next;
-    }
-
-    public String getPrev() {
-        return prev;
+        return retrofit.create(RickAndMortyApiService.class);
     }
 }
+
